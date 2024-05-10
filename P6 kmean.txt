@@ -1,0 +1,43 @@
+Practcal 6 kmean
+# Load necessary libraries
+library(cluster)
+library(data.table)
+library(ggplot2)
+
+# Read the data
+data <- fread("C:\\Users\\aadil\\Documents\\wholesale.csv")
+
+# Display the first few rows of the data
+head(data)
+
+# Define categorical and continuous features
+categorical_features <- c('Channel', 'Region')
+continuous_features <- c('Fresh', 'Milk', 'Grocery', 'Frozen', 'Detergents_Paper', 'Delicassen')
+
+# Summarize continuous features
+summary(data[, ..continuous_features])
+
+# One-hot encode categorical features
+for (col in categorical_features) {
+  dummies <- as.data.table(model.matrix(~0 + factor(data[[col]])))
+  setnames(dummies, sprintf("%s_%s", col, levels(factor(data[[col]]))))
+  data <- cbind(data, dummies)
+  data <- data[, !col, with = FALSE]
+}
+
+# Scale the data
+data_scaled <- scale(data[, ..continuous_features])
+
+# Perform K-Means clustering with different number of clusters
+wcss <- numeric()
+for (k in 1:15) {
+  km <- kmeans(data_scaled, centers = k)
+  wcss[k] <- sum(km$withinss)
+}
+
+# Plot the Elbow Method to determine the optimal number of clusters
+ggplot(data.frame(K = 1:15, WCSS = wcss), aes(x = K, y = WCSS)) +
+  geom_line(color = "blue") +
+  geom_point(color = "blue", size = 2) +
+  labs(x = "Number of Clusters", y = "Within-Cluster Sum of Squares") +
+  ggtitle("Elbow Method for Optimal Number of Clusters")

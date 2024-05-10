@@ -1,0 +1,62 @@
+Its a 4 in 1 practical so read each and every steps mentioned carefully and conduct the practical with ease
+
+
+> Conditional Formatting (Manual)
+Open CF.xlsx > “if condition sheet” > copy paste the table into an empty sheet
+
+Delete Values of Total, Percentage, Roundup,	Remark columns
+
+Select first row of Total column > function > SUM 
+
+Add the column names we need the sum of > ok
+
+Select bottom-right corner of the first Total Cell and drag it till all 4 rows
+
+Formulas:-
+Percentage =e2/3  
+Roundup  =roundup(f2,0)
+remark = if(g2>40,"Pass","Fail")
+
+Apply the above given formulas to all columns
+
+> Pivot Table
+Open prac3demo.xlsx (create a table content by own or take any inbuilt dataset such as IRIS or TITANIC)
+
+Select full table range > Insert menu > Pivot table > ok
+Drag and add columns in the following categories
+This will return a table
+
+Select on date drop down filter and change date to see record of table values for that date
+
+To add Meaningful column for analysing profit for the companies
+Select full table range > Analyze Menu > Field Items & Sets > Calculated Fields
+Give the following inputs:
+Name: Profit
+Formula: ='close price'-'Open price'
+
+Add > Ok
+
+This will return a new column in the table
+
+> VLOOKUP
+Open prac3demo1.xlsx
+Copy paste header of table 
+
+Type 1 in Id, select the empty player cell adjacent to it and click on function
+Select VLOOKUP > ok
+Lookup_value > select id 1 from duplicate table
+Table_array > select the whole original table
+Col_index_num > 2 (Column that we are looking for)
+Range_lookup > False ( EXACT MATCH )
+
+Do the same for all columns
+
+Change value of ID and other values will change as well.
+
+> What-if analysis using Goal Seek
+Open whatif.xlsx 
+
+Select 1st row of percentage > Data Menu > what-if analysis > Goal Seek
+
+The number column will return a value that will eventually be calculated into “600” in multiple3 column
+
